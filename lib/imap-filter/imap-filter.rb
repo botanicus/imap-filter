@@ -67,17 +67,45 @@ module ImapFilter
           puts subject.light_blue
         end
       end
+
+      if f && ! f.seq.empty?
+        @matched_filters << f.dfilt.name
+      end
       
       f.process_actions 
       f.acc.imap.expunge unless _options[:dryrun]
     end
     
     def self.execute_filters
+      @matched_filters = Array.new
+
       #login_imap_accounts
       list_of_filters_to_run.each do |f|
         print "Running filter: ".light_white
         puts "#{f}".light_yellow
         run_filter f
+      end
+
+      self.annotate_source(ARGV[1], @matched_filters)
+    end
+
+    def self.annotate_source(path, filters)
+      return if filters.empty?
+      source = File.readlines(path)
+
+      filters.each do |filter|
+        line = source.find { |line| line.match(/filter.*:#{filter}/) }
+        index = source.index(line)
+        comment_line = "# Last match: #{Time.now.strftime('%d/%m/%Y')}"
+        if source[index - 1].match(/^# Last match:/)
+          source[index - 1] = comment_line
+        else
+          source.insert(index, comment_line)
+        end
+      end
+
+      File.open(path, 'w') do |file|
+        file.puts(source)
       end
     end
     
