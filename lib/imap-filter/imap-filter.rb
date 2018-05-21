@@ -95,7 +95,12 @@ module ImapFilter
 
       filters.each do |filter|
         line = source.find { |line| line.match(/filter.*:#{filter}/) }
-        index = source.index(line)
+
+        unless index = source.index(line)
+          warn "~ #{filter} cannot be found."
+          next
+        end
+
         comment_line = "# Last match: #{Time.now.strftime('%d/%m/%Y')}"
         if source[index - 1].match(/^# Last match:/)
           source[index - 1] = comment_line
