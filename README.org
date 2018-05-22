@@ -13,6 +13,10 @@
 
   [[https://raw.githubusercontent.com/botanicus/imap-filter/9022709efeab65951de98b033d6db89e699cc652/docs/annotation-example.png]]
 
+  It's not bullet-proof and it's very hacky, but it does what I need it to do,
+  which is to let me know which rules are still necessary and which ones are
+  no longer matching and hence can be deleted.
+
 ** Installation
    This is a Ruby CLI application. If you are running Linux, most likely
    you have Ruby already installed. If you are running MacOSX or Windows,
