@@ -7,9 +7,9 @@
   The imap-filter DSL makes it easy to filter. You can also do "dry-runs"
   to make sure what happens is what is expected.
 
-** About this fork
+** About the fork (~botanicus/imap-filter~)
   This will automatically annotate the source code with the timestamp of the last
-  match for each `filter`.
+  match for each ~filter~.
 
   [[https://raw.githubusercontent.com/botanicus/imap-filter/9022709efeab65951de98b033d6db89e699cc652/docs/annotation-example.png]]
 
