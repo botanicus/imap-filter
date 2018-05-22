@@ -101,9 +101,10 @@ module ImapFilter
           next
         end
 
-        comment_line = "# Last match: #{Time.now.strftime('%-d/%-m/%Y %H:%M')}."
-        if source[index - 1].match(/^# Last match:/)
-          source[index - 1] = comment_line
+        comment_line = "# Last match: #{Time.now.strftime('%-d/%-m/%Y at %H:%M')}."
+        index_diff = source[0..index].reverse.index { |line| line.match(/# Last match:/) || line.chomp.empty? }
+        if source[index - index_diff].match(/# Last match:/)
+          source[index - index_diff] = comment_line
         else
           source.insert(index, comment_line)
         end
