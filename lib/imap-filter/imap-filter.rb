@@ -110,8 +110,10 @@ module ImapFilter
         end
       end
 
-      File.open(path, 'w') do |file|
-        file.puts(source)
+      unless source.bytesize == 0
+        File.open(path, 'w') do |file|
+          file.puts(source)
+        end
       end
     end
     
