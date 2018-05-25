@@ -110,11 +110,11 @@ module ImapFilter
         end
       end
 
-      unless source.bytesize == 0
+      #unless source.bytesize == 0
         File.open(path, 'w') do |file|
-          file.puts(source)
+          file.puts(source.join("\n"))
         end
-      end
+      #end
     end
     
     def self.run_filters filters
