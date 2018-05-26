@@ -101,7 +101,7 @@ module ImapFilter
           next
         end
 
-        comment_line = "# Last match: #{Time.now.strftime('%-d/%-m/%Y at %H:%M')}."
+        comment_line = "# Last match: #{Time.now.strftime('%-d/%-m/%Y at %H:%M')}.\n"
         index_diff = source[0..index].reverse.index { |line| line.match(/# Last match:/) || line.chomp.empty? }
         if source[index - index_diff].match(/# Last match:/)
           source[index - index_diff] = comment_line
@@ -112,7 +112,7 @@ module ImapFilter
 
       #unless source.bytesize == 0
         File.open(path, 'w') do |file|
-          file.puts(source.join("\n"))
+          file.puts(source.join)
         end
       #end
     end
